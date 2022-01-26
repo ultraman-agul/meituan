@@ -20,7 +20,7 @@ export default {
 };
 </script>
 
-<style rel="stylesheet/scss" lang="scss">
+<style lang="scss">
 @import "./style/common.scss";
 #app {
     width: 100%;

@@ -140,21 +140,33 @@
           this.alertText = '上传失败，只能传2M以内图片'
           this.showTip = true;
         } else {
-          uploadToken().then((response) => {
-            if (response.data.status === 200) {
-              let data = { token: response.data.uptoken, file }
-              upload(data).then((upResponse) => {
-                let pic_url = config.domain + '/' + upResponse.data.key
-                this.avatar = pic_url;
-                this.loading = false;
-                changeAvatar({ pic_url }).then(() => {
-                })     //更新到数据库
-              })
-            } else {
-              this.alertText = response.data.message
-              this.showTip = true;
+        //   uploadToken().then((response) => {
+        //     if (response.data.status === 200) {
+        //       let data = { token: response.data.uptoken, file }
+        //       upload(data).then((upResponse) => {
+        //         let pic_url = config.domain + '/' + upResponse.data.key
+        //         this.avatar = pic_url;
+        //         this.loading = false;
+        //         changeAvatar({ pic_url }).then(() => {
+        //         })     //更新到数据库
+        //       })
+        //     } else {
+        //       this.alertText = response.data.message
+        //       this.showTip = true;
+        //     }
+        //   })
+
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => {
+                // 读取到的图片base64 数据编码 将此编码字符串传给后台即可
+                const imgcode = e.target.result;
+                console.log(imgcode);
+                upload({file: imgcode}).then(res =>{
+                    console.log(res)
+                })
             }
-          })
+            
         }
       },
       routerChange(url) {
@@ -169,9 +181,15 @@
       this.username = getInfo();
       if (this.username) {
         userInfo().then((response) => {
-          let avatarStr = response.data.data.avatar
-          avatarStr = avatarStr.replace('.com', '.com/')
-          this.avatar = avatarStr;
+          if(response.data.status === 200){
+              let avatarStr = response.data.data.avatar
+              avatarStr = avatarStr.replace('.com', '.com/')
+              this.avatar = avatarStr;
+          }else{
+              this.alertText = '未登录'
+              this.showTip = true
+          }
+          
         })
       }
     }

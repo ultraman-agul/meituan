@@ -11,7 +11,7 @@
         </div>
         <i class="iconfont icon-right">&#xe63f;</i>
       </router-link>
-      <router-link class="info-container address-container" to="/confirmOrder/address" v-else>
+      <router-link class="info-container address-container" to="/confirm_order/address" v-else>
         <div class="address-info">
           <i class="iconfont icon-location">&#xe604;</i>
           <div class="main-info">
@@ -50,19 +50,21 @@
       </div>
       <!--商品列表-->
       <ul class="food-list">
-        <li v-for="(item,key) in order_data" :key="item.id" v-if="Number(key)">
-          <div class="picture">
-            <img :src="item.foods_pic">
-          </div>
-          <div class="food-list-right-part">
-            <div>
-              <span class="name">{{item.name}}</span>
-              <span class="price">￥{{item.price}}</span>
+        <li v-for="(item,key) in order_data" :key="item.id" >
+          <template v-if="Number(key)">
+            <div class="picture">
+                <img :src="item.foods_pic">
             </div>
-            <div>
-              <span class="count">x{{item.num}}</span>
+            <div class="food-list-right-part">
+                <div>
+                <span class="name">{{item.name}}</span>
+                <span class="price">￥{{item.price}}</span>
+                </div>
+                <div>
+                <span class="count">x{{item.num}}</span>
+                </div>
             </div>
-          </div>
+          </template>
         </li>
       </ul>
       <ul class="other-fee-container">
@@ -150,7 +152,7 @@
       //获取用户收货地址
       getAllAddress().then((response) => {
         let data = response.data;
-        if (data.address.length) {      //判断该用户有没有收货地址
+        if (data.address && data.address.length) {      //判断该用户有没有收货地址
           this.emptyAddress = false;
           this.defineAddress = data.address[0];  //默认第一个为默认收获地址
         } else {

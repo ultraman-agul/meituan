@@ -7,6 +7,7 @@ export function getInfo() {
 }
 
 export function setInfo(username) {
+    debugger
   return localStorage.setItem(userInfo, username)
 }
 

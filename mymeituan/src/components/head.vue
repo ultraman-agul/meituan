@@ -35,6 +35,7 @@
     },
     methods: {
       funGoBack() {   //返回上一页
+        // 如果在商家内，则返回到主页面
         if (this.$route.fullPath.indexOf('/store') !== -1) {
           this.$router.push({path: '/index'})
         } else {

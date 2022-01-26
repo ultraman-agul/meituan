@@ -2,7 +2,7 @@
   <div id="star">
     <span class="on" v-for="item in  on" :key="'on' + item"></span>
     <span class="half" v-for="item in half" :key="'half' + item"></span>
-    <span class="off" v-for=" item in (5 - on - half)" :key="'off' + item"></span>
+    <span class="off" v-for=" item in off" :key="'off' + item"></span>
   </div>
 </template>
 

@@ -25,8 +25,9 @@ Vue.config.productionTip = false
 Vue.use(VueCookies)
 Vue.use(MINTUI)
 // set default config
-Vue.$cookies.config('7d')
+Vue.$cookies.config('7d') // 设置cookie过期时间
 
+// 使用fastclick处理移动端点击事件延迟300ms的问题
 if ('addEventListener' in document) {
   document.addEventListener('DOMContentLoaded', function () {
     FastClick.attach(document.body);

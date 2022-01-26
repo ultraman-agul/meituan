@@ -48,3 +48,7 @@ export const _delete = (req) => {
 export const _postNoWithCredentials = (req) => {
   return axios({method: 'post', url: `/${req.url}`, data: req.data,withCredentials:false})
 }
+
+export const _postImage = (req) => {
+    return axios({method: 'post', url: `${req.url}`, data: req.data,})
+}
